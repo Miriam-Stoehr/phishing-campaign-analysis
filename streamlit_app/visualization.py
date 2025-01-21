@@ -156,26 +156,10 @@ def display_position_analysis(data: pd.DataFrame):
     st.write("")
     st.write("")
 
-    # Create a layout with 2 columns
-    col1, col2 = st.columns([1,6])
 
-    with col1:
-        # Add a slicer for selecting the status
-        selected_status = st.selectbox(
-            "Choose a status:",
-            ["Email Sent", "Email Opened", "Clicked Link", "Submitted Data", "Email Reported"],
-        )
-    for _ in range(4):
-        st.write("")
 
-    # Filter data based on the selected status
-    if selected_status == "Email Sent":
-        filtered_data = data # No filtering; use all data
-    elif selected_status == "Email Reported":
-        filtered_data = data[data["reported"] == True]
-    else:
-        filtered_data = data[data["status"] == selected_status]
-
+    filtered_data = data
+    
     # Create layout with 2 columns
     col1, col2 = st.columns(2)
 
