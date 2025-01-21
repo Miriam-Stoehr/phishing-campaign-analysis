@@ -34,7 +34,8 @@ def display_sidebar(data: pd.DataFrame) -> Tuple[pd.Timestamp, pd.Timestamp, Lis
     selected_positions = st.sidebar.multiselect("Job Field", positions, positions)
     selected_templates = st.sidebar.multiselect("Select Template", data['template_name'].unique())
     selected_statuses = st.sidebar.multiselect("Select Status", data['status'].unique())
-    return start_date, last_date, selected_positions, selected_templates, selected_statuses
+    email_reported = st.sidebar.multiselect("Select Email Reported Status", data['reported'].unique()
+    return start_date, last_date, selected_positions, selected_templates, selected_statuses, email_reported
 
 def filter_data(
     data: pd.DataFrame, 
