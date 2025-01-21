@@ -60,15 +60,10 @@ class Dashboard:
             </style>
         """, unsafe_allow_html=True)
 
-    @staticmethod
-    def load_config() -> dict:
-        with open("config.json") as file:
-            return json.load(file)
-
     def main(self) -> None:
         self.configure_page()
 
-        config = self.load_config()
+        api_key = st.secrets["MY_SECRETS"]["GOPHISH_API_KEY"]
         st.image("mail.png", width=60)
         st.title("Phishing Campaign Dashboard")
 
@@ -78,7 +73,7 @@ class Dashboard:
             index=0
         )
 
-        results_csv, events_csv = self._load_data(config, data_source)
+        results_csv, events_csv = self._load_data(api_key, data_source)
         results_df = load_data(results_csv)
         results_df["send_date"] = pd.to_datetime(results_df["send_date"])
         results_df["modified_date"] = pd.to_datetime(results_df["modified_date"])
@@ -102,9 +97,9 @@ class Dashboard:
         app.run()
 
     @staticmethod
-    def _load_data(config: dict, data_source: str) -> Tuple[str, str]:
+    def _load_data(api_key: str, data_source: str) -> Tuple[str, str]:
         if data_source == "Real Campaign Data":
-            client = GophishClient(api_key=config["GOPHISH_API_KEY"])
+            client = GophishClient(api_key=api_key)
             campaigns = client.fetch_campaigns()
             processor = CampaignDataProcessor(campaigns)
             return processor.process_campaigns()
