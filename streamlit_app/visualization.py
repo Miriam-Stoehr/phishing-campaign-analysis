@@ -4,6 +4,7 @@ import pandas as pd
 from typing import List
 from .kpi_calculations import calculate_kpis_abs, calculate_kpis_rel
 from .filters import display_sidebar, filter_data
+from ..streamlit_app_main.Dashboard import selected_statuses
 
 def display_kpi_and_funnel(data: pd.DataFrame, kpis: List[float], kpi_names: List[str]):
     """
@@ -156,8 +157,6 @@ def display_position_analysis(data: pd.DataFrame):
     # Insert whitespace
     st.write("")
     st.write("")
-
-    start_date, last_date, selected_positions, selected_templates, selected_statuses = display_sidebar(data)
     
     # Create layout with 2 columns
     col1, col2 = st.columns(2)
