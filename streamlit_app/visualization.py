@@ -156,31 +156,13 @@ def display_position_analysis(data: pd.DataFrame):
     st.write("")
     st.write("")
 
-    # Create a layout with 2 columns
-    col1, col2 = st.columns([1,6])
-
-    with col1:
-        # Add a slicer for selecting the status
-        selected_status = st.selectbox(
-            "Choose a status:",
-            ["Email Sent", "Email Opened", "Clicked Link", "Submitted Data", "Email Reported"],
-        )
-    for _ in range(4):
-        st.write("")
-
-    # Filter data based on the selected status
-    if selected_status == "Email Sent":
-        filtered_data = data # No filtering; use all data
-    elif selected_status == "Email Reported":
-        filtered_data = data[data["reported"] == True]
-    else:
-        filtered_data = data[data["status"] == selected_status]
+    
 
     # Create layout with 2 columns
     col1, col2 = st.columns(2)
 
     # Group data by position and calculate metrics
-    filtered_position_counts = filtered_data["position_group"].value_counts().reset_index()
+    filtered_position_counts = data["position_group"].value_counts().reset_index()
     filtered_position_counts.columns = ["Position", "Count"]
 
     # Bar chart for positions
@@ -189,7 +171,7 @@ def display_position_analysis(data: pd.DataFrame):
             filtered_position_counts,
             x="Position",
             y="Count",
-            title=f"{selected_status} by Job Field",
+            title=f"Percentage per Job Field",
             color="Position",
             color_discrete_sequence=px.colors.sequential.Bluyl[-5:],
             height=450
@@ -198,7 +180,7 @@ def display_position_analysis(data: pd.DataFrame):
         fig_position_bar.update_layout(
             showlegend=False,  # Remove the legend
             title={
-                "text": f"{selected_status} by Job Field",  # Title text
+                "text": f"Distribution by Job Field",  # Title text
                 "x": 0.5,  # Center the title (horizontal alignment)
                 "xanchor": "center",  # Anchor the title to the center
                 "yanchor": "top"  # Anchor the title to the top
@@ -212,7 +194,7 @@ def display_position_analysis(data: pd.DataFrame):
             filtered_position_counts,
             names="Position",
             values="Count",
-            title=f"Distribution of {selected_status} by Job Field",
+            title=f"Percentage per Job Field",
             color_discrete_sequence=px.colors.sequential.Bluyl[-6:],
             height=450
         )
@@ -220,7 +202,7 @@ def display_position_analysis(data: pd.DataFrame):
         fig_position_pie.update_layout(
             showlegend=False,  # Remove the legend
             title={
-                "text": f"Distribution of {selected_status} by Job Field",  # Title text
+                "text": f"Distribution by Job Field",  # Title text
                 "x": 0.5,  # Center the title (horizontal alignment)
                 "xanchor": "center",  # Anchor the title to the center
                 "yanchor": "top"  # Anchor the title to the top
