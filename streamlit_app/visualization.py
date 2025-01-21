@@ -3,6 +3,7 @@ import plotly.express as px
 import pandas as pd
 from typing import List
 from .kpi_calculations import calculate_kpis_abs, calculate_kpis_rel
+from .filters import display_sidebar, filter_data
 
 def display_kpi_and_funnel(data: pd.DataFrame, kpis: List[float], kpi_names: List[str]):
     """
@@ -156,15 +157,13 @@ def display_position_analysis(data: pd.DataFrame):
     st.write("")
     st.write("")
 
-
-
-    filtered_data = data
+    start_date, last_date, selected_positions, selected_templates, selected_statuses = display_sidebar(data)
     
     # Create layout with 2 columns
     col1, col2 = st.columns(2)
 
     # Group data by position and calculate metrics
-    filtered_position_counts = filtered_data["position_group"].value_counts().reset_index()
+    filtered_position_counts = data["position_group"].value_counts().reset_index()
     filtered_position_counts.columns = ["Position", "Count"]
 
     # Bar chart for positions
@@ -173,7 +172,7 @@ def display_position_analysis(data: pd.DataFrame):
             filtered_position_counts,
             x="Position",
             y="Count",
-            title=f"{selected_status} by Job Field",
+            title=f"{selected_statuses} by Job Field",
             color="Position",
             color_discrete_sequence=px.colors.sequential.Bluyl[-5:],
             height=450
@@ -182,7 +181,7 @@ def display_position_analysis(data: pd.DataFrame):
         fig_position_bar.update_layout(
             showlegend=False,  # Remove the legend
             title={
-                "text": f"{selected_status} by Job Field",  # Title text
+                "text": f"{selected_statuses} by Job Field",  # Title text
                 "x": 0.5,  # Center the title (horizontal alignment)
                 "xanchor": "center",  # Anchor the title to the center
                 "yanchor": "top"  # Anchor the title to the top
@@ -196,7 +195,7 @@ def display_position_analysis(data: pd.DataFrame):
             filtered_position_counts,
             names="Position",
             values="Count",
-            title=f"Distribution of {selected_status} by Job Field",
+            title=f"Distribution of {selected_statuses} by Job Field",
             color_discrete_sequence=px.colors.sequential.Bluyl[-6:],
             height=450
         )
@@ -204,7 +203,7 @@ def display_position_analysis(data: pd.DataFrame):
         fig_position_pie.update_layout(
             showlegend=False,  # Remove the legend
             title={
-                "text": f"Distribution of {selected_status} by Job Field",  # Title text
+                "text": f"Distribution of {selected_statuses} by Job Field",  # Title text
                 "x": 0.5,  # Center the title (horizontal alignment)
                 "xanchor": "center",  # Anchor the title to the center
                 "yanchor": "top"  # Anchor the title to the top
