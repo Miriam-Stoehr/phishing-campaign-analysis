@@ -78,7 +78,7 @@ class Dashboard:
         results_df["send_date"] = pd.to_datetime(results_df["send_date"])
         results_df["modified_date"] = pd.to_datetime(results_df["modified_date"])
 
-        start_date, last_date, selected_positions, selected_templates, selected_statuses, email_reported = display_sidebar(results_df)
+        start_date, last_date, selected_positions, selected_templates, selected_statuses = display_sidebar(results_df)
         filtered_data = filter_data(results_df, start_date, last_date, selected_positions, selected_templates, selected_statuses)
 
         kpis = calculate_kpis_abs(filtered_data)
