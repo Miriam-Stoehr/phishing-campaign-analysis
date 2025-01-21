@@ -34,7 +34,8 @@ def display_sidebar(data: pd.DataFrame) -> Tuple[pd.Timestamp, pd.Timestamp, Lis
     selected_positions = st.sidebar.multiselect("Job Field", positions, positions)
     selected_templates = st.sidebar.multiselect("Select Template", data['template_name'].unique())
     selected_statuses = st.sidebar.multiselect("Select Status", data['status'].unique())
-    return start_date, last_date, selected_positions, selected_templates, selected_statuses
+    email_reported = st.sidebar.checkbox("Email Reported", value=True)
+    return start_date, last_date, selected_positions, selected_templates, selected_statuses, email_reported
 
 def filter_data(
     data: pd.DataFrame, 
@@ -42,10 +43,12 @@ def filter_data(
     last_date: pd.Timestamp, 
     positions: List[str], 
     templates: List[str], 
-    statuses: List[str]
+    statuses: List[str],
+    email_reported: bool
 ) -> pd.DataFrame:
     filtered = data[(data['send_date'] >= start_date) & (data['send_date'] < (last_date + pd.Timedelta(days=1)))].copy()
     filtered = filtered[filtered['position_group'].isin(positions)] if positions else filtered
     filtered = filtered[filtered['template_name'].isin(templates)] if templates else filtered
     filtered = filtered[filtered['status'].isin(statuses)] if statuses else filtered
+    filtered = filtered[filtered['reported'] == email_reported]
     return filtered
