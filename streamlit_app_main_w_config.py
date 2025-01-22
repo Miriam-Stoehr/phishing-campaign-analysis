@@ -108,7 +108,11 @@ class Dashboard:
 
         calculate_kpis_table(filtered_data, ["Email Sent", "Email Opened", "Clicked Link", "Submitted Data", "Email Reported"])
 
+
+
         display_personal_data(filtered_data)
+
+
 
 if __name__ == "__main__":
     dashboard = Dashboard()
