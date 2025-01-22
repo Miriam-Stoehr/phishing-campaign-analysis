@@ -302,7 +302,7 @@ def display_personal_data(data: pd.DataFrame):
     # Convert DataFrame to CSV string
     filtered_csv_data = new_data.to_csv(index=False)
     # Download button
-    st.download_button(label="Download Selected Data", data=filtered_csv_data, file_name="filtered_results.csv", mime="text/csv")
+    st.download_button(label="Download Selected Data as CSV", data=filtered_csv_data, file_name="filtered_results.csv", mime="text/csv")
     st.write("")
     # Show dataframe
     st.dataframe(new_data, height=400)  # shows apr. 10 rows
