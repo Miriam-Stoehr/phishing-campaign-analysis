@@ -267,7 +267,7 @@ def calculate_kpis_table(data: pd.DataFrame, status_order: List[str]):
     st.markdown(
         f"""
         <div style="text-align: left; padding: 10px;">
-            <h5 style="margin-bottom: 40px;">Absolute KPIs per Professional Field</h5>
+            <h5 style="margin-bottom: 40px;">Absolute KPIs per Department</h5>
             <div style="display: flex; justify-content: left; overflow-x: auto;">
                 {kpis_df_html}
             </div>
