@@ -21,7 +21,6 @@ class StreamlitApp:
 
     def run(self) -> None:
         self._display_csv_download_buttons()
-        self._display_results_preview()
 
     def _display_csv_download_buttons(self) -> None:
         col1, col2 = st.columns([1, 6])
@@ -33,14 +32,6 @@ class StreamlitApp:
     @staticmethod
     def _create_download_button(label: str, data: str, file_name: str) -> None:
         st.download_button(label=label, data=data, file_name=file_name, mime="text/csv")
-
-    def _display_results_preview(self) -> None:
-        results_df = pd.read_csv(io.StringIO(self.results_csv))
-        st.write("")
-        st.markdown("##### Campaign Results Preview")
-        st.write("")
-        st.dataframe(results_df.head())
-
 
 class Dashboard:
     """Orchestrates the entire Streamlit dashboard logic."""
@@ -59,13 +50,30 @@ class Dashboard:
             .block-container { padding-top: 1rem; padding-bottom: 1rem; }
             </style>
         """, unsafe_allow_html=True)
+    
+    @staticmethod
+    def _load_data(api_key: str, data_source: str) -> Tuple[str, str]:
+        if data_source == "Real Campaign Data":
+            client = GophishClient(api_key=api_key)
+            campaigns = client.fetch_campaigns()
+            processor = CampaignDataProcessor(campaigns)
+            return processor.process_campaigns()
+        else:
+            with open("./generated_results/generated_results.csv", "r", encoding="utf-8") as file:
+                generated_results_csv = file.read()
+            with open("./generated_results/generated_events.csv", "r", encoding="utf-8") as file:
+                generated_events_csv = file.read()
+            return generated_results_csv, generated_events_csv
 
     def main(self) -> None:
-        self.configure_page()
 
+        self.configure_page()
+        
         api_key = st.secrets["MY_SECRETS"]["GOPHISH_API_KEY"]
+
         st.image("mail.png", width=60)
         st.title("Phishing Campaign Dashboard")
+        st.write("")
 
         data_source = st.sidebar.radio(
             "### **Select Data Source:**",
@@ -83,33 +91,21 @@ class Dashboard:
 
         kpis = calculate_kpis_abs(filtered_data)
         kpi_names = ["Sent Emails", "Opened Emails", "Clicked Links", "Submitted Data", "Reported Emails"]
-        display_kpi_and_funnel(filtered_data, kpis, kpi_names)
-        display_position_analysis(filtered_data)
 
-        calculate_kpis_table(filtered_data, ["Email Sent", "Email Opened", "Clicked Link", "Submitted Data", "Email Reported"])
-
-        st.divider()
-        st.write("")
-        st.header("Download Campaign Results and Events Data")
+        st.markdown("#### Download Campaign Results and Events Data")
         st.write("")
 
         app = StreamlitApp(results_csv, events_csv)
         app.run()
 
-    @staticmethod
-    def _load_data(api_key: str, data_source: str) -> Tuple[str, str]:
-        if data_source == "Real Campaign Data":
-            client = GophishClient(api_key=api_key)
-            campaigns = client.fetch_campaigns()
-            processor = CampaignDataProcessor(campaigns)
-            return processor.process_campaigns()
-        else:
-            with open("./generated_results/generated_results.csv", "r", encoding="utf-8") as file:
-                generated_results_csv = file.read()
-            with open("./generated_results/generated_events.csv", "r", encoding="utf-8") as file:
-                generated_events_csv = file.read()
-            return generated_results_csv, generated_events_csv
+        st.write("")
+        st.divider()
+        st.write("")
 
+        display_kpi_and_funnel(filtered_data, kpis, kpi_names)
+        display_position_analysis(filtered_data)
+
+        calculate_kpis_table(filtered_data, ["Email Sent", "Email Opened", "Clicked Link", "Submitted Data", "Email Reported"])
 
 if __name__ == "__main__":
     dashboard = Dashboard()
