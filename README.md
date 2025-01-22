@@ -119,3 +119,9 @@ This repository provides a Streamlit-based dashboard that complements the GoPhis
 ## Acknowledgements
 
 This dashboard was created for a use-case provided by Proximus Ada, the first Belgian center of excellence combining artificial intelligence and cybersecurity, within the BeCode Data Science and AI Bootcamp 2024/2025.
+
+## Screenshots
+
+![Screenshot of Dashboard](./screenshots/Screenshot1.png)
+
+![Screenshot of Dashboard](./screenshots/Screenshot2.png)
