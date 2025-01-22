@@ -171,7 +171,7 @@ def display_position_analysis(data: pd.DataFrame):
             filtered_position_counts,
             x="Position",
             y="Count",
-            title=f"Percentage per Job Field",
+            title=f"Percentage per Department",
             color="Position",
             color_discrete_sequence=px.colors.sequential.Bluyl[-5:],
             height=450
@@ -180,7 +180,7 @@ def display_position_analysis(data: pd.DataFrame):
         fig_position_bar.update_layout(
             showlegend=False,  # Remove the legend
             title={
-                "text": f"Distribution by Job Field",  # Title text
+                "text": f"Distribution by Department",  # Title text
                 "x": 0.5,  # Center the title (horizontal alignment)
                 "xanchor": "center",  # Anchor the title to the center
                 "yanchor": "top"  # Anchor the title to the top
@@ -194,7 +194,7 @@ def display_position_analysis(data: pd.DataFrame):
             filtered_position_counts,
             names="Position",
             values="Count",
-            title=f"Percentage per Job Field",
+            title=f"Percentage per Department",
             color_discrete_sequence=px.colors.sequential.Bluyl[-6:],
             height=450
         )
@@ -202,7 +202,7 @@ def display_position_analysis(data: pd.DataFrame):
         fig_position_pie.update_layout(
             showlegend=False,  # Remove the legend
             title={
-                "text": f"Distribution by Job Field",  # Title text
+                "text": f"Distribution by Department",  # Title text
                 "x": 0.5,  # Center the title (horizontal alignment)
                 "xanchor": "center",  # Anchor the title to the center
                 "yanchor": "top"  # Anchor the title to the top
