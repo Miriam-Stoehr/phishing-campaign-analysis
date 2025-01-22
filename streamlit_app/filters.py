@@ -31,7 +31,7 @@ def display_sidebar(data: pd.DataFrame) -> Tuple[pd.Timestamp, pd.Timestamp, Lis
     start_date = pd.Timestamp(st.sidebar.date_input("Start date", data['send_date'].min().date())).tz_localize("UTC")
     last_date = pd.Timestamp(st.sidebar.date_input("End date", data['send_date'].max().date())).tz_localize("UTC")
     positions = sorted(data['position_group'].unique())
-    selected_positions = st.sidebar.multiselect("Job Field", positions, positions)
+    selected_positions = st.sidebar.multiselect("Department", positions, positions)
     selected_templates = st.sidebar.multiselect("Select Template", data['template_name'].unique())
     selected_statuses = st.sidebar.multiselect("Select Status", data['status'].unique())
     email_reported = st.sidebar.selectbox("Email Reported", options=["Both", "Reported", "Not Reported"], index=0)
