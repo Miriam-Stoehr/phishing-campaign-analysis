@@ -8,7 +8,7 @@ from gophish import Gophish
 from streamlit_app.data_loader import load_data
 from streamlit_app.filters import display_sidebar, filter_data
 from streamlit_app.kpi_calculations import calculate_kpis_abs
-from streamlit_app.visualization import display_kpi_and_funnel, display_position_analysis, calculate_kpis_table
+from streamlit_app.visualization import display_kpi_and_funnel, display_position_analysis, calculate_kpis_table, display_personal_data
 from streamlit_app.gophish_utils import GophishClient, CampaignDataProcessor
 
 
@@ -106,6 +106,8 @@ class Dashboard:
         display_position_analysis(filtered_data)
 
         calculate_kpis_table(filtered_data, ["Email Sent", "Email Opened", "Clicked Link", "Submitted Data", "Email Reported"])
+
+        display_personal_data(filtered_data)
 
 if __name__ == "__main__":
     dashboard = Dashboard()

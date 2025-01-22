@@ -276,3 +276,28 @@ def calculate_kpis_table(data: pd.DataFrame, status_order: List[str]):
         unsafe_allow_html=True
     )
     st.write("")
+
+def display_personal_data(data: pd.DataFrame):
+    """
+    Display information per employee and return a DataFrame.
+
+    Parameters:
+    data (pd.DataFrame): DataFrame containing employee data to display."""
+    if data.empty:
+        st.write("No data available to display.")
+        return
+    # Define the columns to display and their order
+    columns_to_display = ["position", "first_name", "last_name", "email","campaign_id", "template_name", "status", "send_date", "modified_date", "reported"]
+    # Filter and reorder the columns
+    new_data = data[columns_to_display]
+    # Set the index to start from 1
+    new_data.index += 1
+
+    # Display the DataFrame in a scrollable format with limited height
+    st.write("")
+    st.divider()
+    st.write("")
+    st.write("### Details")
+    st.write("")
+    st.dataframe(new_data, height=400)  # shows apr. 10 rows
+    st.write("")
