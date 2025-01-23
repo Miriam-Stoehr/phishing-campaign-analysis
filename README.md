@@ -109,7 +109,7 @@ A demonstration of the dashboard based on the provided synthetic data can be fou
     ```
    * For the online deployment:
      * Create an account at Streamlit.
-     * Follow the instructions to deploy your cloned GitHub repository.
+     * Follow the instructions to deploy your cloned GitHub repository, pointing to `streamlit_app_main.py`
 
 ## Usage
 
