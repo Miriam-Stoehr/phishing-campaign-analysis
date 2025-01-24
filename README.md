@@ -1,8 +1,8 @@
 # Streamlit Dashboard for GoPhish Campaign Analysis
 
 
-This repository provides a Streamlit-based dashboard that complements the GoPhish application this repository: https://github.com/kvnpotter/phishing-analysis. The dashboard fetches campaign data via the GoPhish API, allowing users to download events and results of all campaigns as CSV files. It also offers visualizations of key performance indicators (KPIs) such as the proportion of emails sent, opened, and links clicked, with filtering options by date, professional field, status, and more.
-A demonstration of the dashboard based on the provided synthetic data can be found here: https://gophish-analysis.streamlit.app/.
+This repository provides a Streamlit-based dashboard that complements the [GoPhish application](https://github.com/kvnpotter/phishing-analysis). The dashboard fetches campaign data via the GoPhish API, allowing users to download events and results of all campaigns as CSV files. It also offers visualizations of key performance indicators (KPIs) such as the proportion of emails sent, opened, and links clicked, with filtering options by date, professional field, status, and more.
+A demonstration of the dashboard based on the provided synthetic data can be found [here](https://gophish-analysis.streamlit.app/).
 
 ## Features
 * **Data Fetching:** Retrieves campaign data from the GoPhish application using the GoPhish API.
