@@ -150,7 +150,7 @@ def display_position_analysis(data: pd.DataFrame):
     # Insert whitespace
     st.write("")
 
-    st.header("Position Analysis")
+    st.header("Department Analysis")
 
     # Insert whitespace
     st.write("")
