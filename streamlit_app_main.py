@@ -74,12 +74,7 @@ class Dashboard:
         st.image("mail.png", width=60)
         st.title("Phishing Campaign Dashboard")
         st.write("")
-
-        data_source = st.sidebar.radio(
-            "### **Select Data Source:**",
-            options=["Generated Campaign Data", "Real Campaign Data"],
-            index=0
-        )
+        data_source = "Generated Campaign Data"
 
         results_csv, events_csv = self._load_data(api_key, data_source)
         results_df = load_data(results_csv)
