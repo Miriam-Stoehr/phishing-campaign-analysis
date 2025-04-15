@@ -119,7 +119,7 @@ A demonstration of the dashboard based on the provided synthetic data can be fou
 
 ## Acknowledgements
 
-This dashboard was created for a use-case provided by Proximus Ada, the first Belgian center of excellence combining artificial intelligence and cybersecurity, within the BeCode Data Science and AI Bootcamp 2024/2025.
+This dashboard was created for a use-case provided by a leading Belgian initiative focused on AI and cybersecurity advancements, within the BeCode Data Science and AI Bootcamp 2024/2025.
 
 ## Screenshots
 
